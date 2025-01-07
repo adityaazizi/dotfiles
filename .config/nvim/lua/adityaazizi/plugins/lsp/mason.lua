@@ -24,6 +24,7 @@ return {
 		})
 
 		mason_lspconfig.setup({
+			automatic_installation = true,
 			-- list of servers for mason to install
 			ensure_installed = {
 				"html",
@@ -35,6 +36,9 @@ return {
 				"emmet_ls",
 				"prismals",
 				"pyright",
+				"ruff",
+				"clangd",
+				"sqlls",
 			},
 		})
 
@@ -44,7 +48,10 @@ return {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
+				"flake8", -- python linter
 				"eslint_d", -- js linter
+				"clang-format", -- C++ formater
+				"cpplint", -- C++ linter
 			},
 		})
 	end,
