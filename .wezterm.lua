@@ -23,10 +23,7 @@ end)
 
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 1
-config.macos_window_background_blur = 0
 
--- Add this to your existing wezterm.lua
--- config.default_prog = { "/opt/homebrew/bin/tmux", "new-session", "-A", "-D", "-s", "main" }
 -- my coolnight colorscheme:
 config.colors = {
 	foreground = "#CBE0F0",
