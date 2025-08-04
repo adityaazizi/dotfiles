@@ -1,76 +1,62 @@
 return {
-    "williamboman/mason.nvim",
-    dependencies = {
-        "williamboman/mason-lspconfig.nvim",
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-    },
-    config = function()
-        -- import mason
-        local mason = require("mason")
-        -- import mason-lspconfig
-        local mason_lspconfig = require("mason-lspconfig")
-        local mason_tool_installer = require("mason-tool-installer")
-        -- enable mason and configure icons
-        mason.setup({
-            ui = {
-                icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
-                },
-            },
-        })
-        mason_lspconfig.setup({
-            automatic_installation = true,
-            -- list of servers for mason to install
-            ensure_installed = {
-                -- Python
-                "pyright",
-                "ruff_lsp",
-                "jedi_language_server", -- Optional second Python LSP for more features
+  "williamboman/mason.nvim",
+  dependencies = {
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+  },
+  config = function()
+    local mason = require("mason")
+    local mason_lspconfig = require("mason-lspconfig")
+    local mason_tool_installer = require("mason-tool-installer")
 
-                -- Web development
-                "html",
-                "cssls",
-                "tailwindcss",
-                "svelte",
-                "graphql",
-                "emmet_ls",
-                "prismals",
+    mason.setup({
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
+    })
 
-                -- Lua
-                "lua_ls",
+    mason_lspconfig.setup({
+      ensure_installed = {
+        -- Web / Frontend
+        "ts_ls",
+        "html",
+        "cssls",
+        "tailwindcss",
+        "svelte",
+        "emmet_ls",
+        "graphql",
+        "prismals",
+        "eslint",
 
-                -- C/C++
-                "clangd",
+        -- AI / Backend
+        "pyright",
+        "clangd",
+        "cmake",
+        "dockerls",
+        "jsonls",
+        "yamlls",
 
-                -- SQL
-                "sqlls",
-            },
-        })
-        mason_tool_installer.setup({
-            ensure_installed = {
-                -- Python tools
-                "black", -- formatter
-                "isort", -- import formatter
-                "flake8", -- linter
-                "mypy", -- static type checker
-                "debugpy", -- debugger
+        -- Utilities
+        "lua_ls",
+        "marksman",
+      },
+    })
 
-                -- Web dev tools
-                "prettier", -- formatter
-                "eslint_d", -- js linter
-
-                -- Lua
-                "stylua", -- lua formatter
-
-                -- C++
-                "clang-format", -- formatter
-                "cpplint", -- linter
-
-                -- General
-                "codelldb", -- debugger for multiple languages
-            },
-        })
-    end,
+    mason_tool_installer.setup({
+      ensure_installed = {
+        -- Formatter
+        "prettier",
+        "stylua",
+        "isort",
+        "black",
+        -- Linter
+        "pylint",
+        "eslint_d",
+      },
+    })
+  end,
 }
