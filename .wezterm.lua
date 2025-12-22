@@ -21,7 +21,7 @@ wezterm.on("gui-startup", function()
 	window:gui_window():maximize()
 end)
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.window_background_opacity = 1
 
 -- my coolnight colorscheme:

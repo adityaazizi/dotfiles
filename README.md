@@ -6,10 +6,10 @@ A minimal and cross-platform development environment setup for **macOS** and **L
 
 ```bash
 # Clone the repository
-git clone https://github.com/adityaazizi/dotfiles.git ~/.dotfiles
+git clone https://github.com/adityaazizi/dotfiles.git ~/dotfiles
 
 # Navigate to dotfiles directory
-cd ~/.dotfiles
+cd ~/dotfiles
 
 # Run the automated setup
 ./symlink.sh
@@ -87,10 +87,10 @@ rm wezterm-*.deb
 
 ```bash
 # Clone the repository
-git clone https://github.com/adityaazizi/dotfiles.git ~/.dotfiles
+git clone https://github.com/adityaazizi/dotfiles.git ~/dotfiles
 
 # Navigate to dotfiles directory
-cd ~/.dotfiles
+cd ~/dotfiles
 
 # Run the automated setup script
 ./symlink.sh
@@ -116,10 +116,10 @@ cd ~/.dotfiles
 mkdir -p ~/.config
 
 # Create symlinks manually
-ln -sf ~/.dotfiles/.config/nvim ~/.config/nvim
-ln -sf ~/.dotfiles/.config/tmux ~/.config/tmux
-ln -sf ~/.dotfiles/.wezterm.lua ~/.wezterm.lua
-ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/dotfiles/.config/tmux ~/.config/tmux
+ln -sf ~/dotfiles/.wezterm.lua ~/.wezterm.lua
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
 
 # Install TPM (Tmux Plugin Manager)
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
