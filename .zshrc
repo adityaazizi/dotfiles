@@ -139,3 +139,6 @@ if command -v eza &> /dev/null; then
 fi
 
 
+
+# opencode
+export PATH=/home/adityaazizi/.opencode/bin:$PATH

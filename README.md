@@ -1,8 +1,8 @@
-# Dotfiles ✨
+# Dotfiles
 
 A minimal and cross-platform development environment setup for **macOS** and **Linux**. These dotfiles provide a modern, efficient workflow with Neovim, Tmux, WezTerm, and Zsh.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone the repository
@@ -11,11 +11,11 @@ git clone https://github.com/adityaazizi/dotfiles.git ~/dotfiles
 # Navigate to dotfiles directory
 cd ~/dotfiles
 
-# Run the automated setup
-./symlink.sh
+# Install configurations to your home directory
+./update_local.sh
 ```
 
-## 📦 What's Included
+## What's Included
 
 | Tool | Description | Key Features |
 |------|-------------|--------------|
@@ -24,7 +24,7 @@ cd ~/dotfiles
 | **WezTerm** | GPU-accelerated terminal | Custom colorscheme, font rendering, cross-platform |
 | **Zsh** | Feature-rich shell | Oh My Zsh, Powerlevel10k, autosuggestions, syntax highlighting |
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 ### macOS (using Homebrew)
 ```bash
@@ -81,7 +81,7 @@ sudo apt-get install -f  # Fix any missing dependencies
 rm wezterm-*.deb
 ```
 
-## 📋 Installation
+## Installation
 
 ### Method 1: Automated Setup (Recommended)
 
@@ -92,16 +92,16 @@ git clone https://github.com/adityaazizi/dotfiles.git ~/dotfiles
 # Navigate to dotfiles directory
 cd ~/dotfiles
 
-# Run the automated setup script
-./symlink.sh
+# Run the install script
+./update_local.sh
 ```
 
 The script will:
-- ✅ Check prerequisites
-- ✅ Backup existing configurations
-- ✅ Create symlinks automatically
-- ✅ Install Tmux Plugin Manager
-- ✅ Setup tmux plugins
+- Check prerequisites
+- Backup existing configurations
+- Copy configurations from repo to home directory
+- Install Tmux Plugin Manager
+- Setup tmux plugins
 
 ### Method 2: Manual Setup
 
@@ -109,23 +109,60 @@ If you prefer manual control:
 
 ```bash
 # Clone repository
-git clone https://github.com/adityaazizi/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/adityaazizi/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 
 # Create directories
 mkdir -p ~/.config
 
-# Create symlinks manually
-ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
-ln -sf ~/dotfiles/.config/tmux ~/.config/tmux
-ln -sf ~/dotfiles/.wezterm.lua ~/.wezterm.lua
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
+# Copy configurations manually
+cp -r .config/nvim ~/.config/nvim
+cp -r .config/tmux ~/.config/tmux
+cp .wezterm.lua ~/.wezterm.lua
+cp .zshrc ~/.zshrc
 
 # Install TPM (Tmux Plugin Manager)
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
 
-## 🎯 Post-Installation
+## Two-Way Sync
+
+This dotfiles setup uses a **copy-based approach** instead of symlinks for better stability. Two scripts are provided for syncing:
+
+| Script | Direction | Purpose |
+|--------|-----------|---------|
+| `update_local.sh` | Repo -> Home | Install/refresh configs from repository |
+| `update_remote.sh` | Home -> Repo | Capture local changes for version control |
+
+### Workflow
+
+**Initial Setup or Refresh Configs:**
+```bash
+# Copy configs from repo to home directory
+./update_local.sh
+```
+
+**After Making Local Changes:**
+```bash
+# Sync your local changes back to the repo
+./update_remote.sh
+
+# Then commit your changes
+git add -A
+git commit -m "Update configurations"
+git push
+```
+
+### What Gets Synced
+
+| Configuration | Location |
+|---------------|----------|
+| Neovim | `~/.config/nvim/` |
+| Tmux | `~/.config/tmux/` (excludes `plugins/` folder) |
+| WezTerm | `~/.wezterm.lua` |
+| Zsh | `~/.zshrc` |
+
+## Post-Installation
 
 1. **Restart your terminal** or source the new shell configuration:
    ```bash
@@ -156,7 +193,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
    chsh -s $(which zsh)
    ```
 
-## ⚙️ Configuration Details
+## Configuration Details
 
 ### Neovim Features
 - **Plugin Manager**: Lazy.nvim for fast, lazy-loaded plugins
@@ -188,7 +225,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 - **Performance**: GPU acceleration enabled
 - **Integration**: Works seamlessly with tmux and terminal tools
 
-## 🛠️ Customization Guide
+## Customization Guide
 
 ### Modifying Neovim
 Edit files in `~/.config/nvim/lua/adityaazizi/`:
@@ -212,7 +249,9 @@ Edit `~/.wezterm.lua`:
 - Change font, size, or colorscheme
 - Modify window behavior and appearance
 
-## 🔧 Troubleshooting
+**Remember:** After making local changes, run `./update_remote.sh` to sync them back to the repository.
+
+## Troubleshooting
 
 ### Common Issues
 
@@ -245,14 +284,14 @@ For tool-specific issues:
 - [WezTerm Documentation](https://wezfurlong.org/wezterm/)
 - [Oh My Zsh Wiki](https://github.com/ohmyzsh/ohmyzsh/wiki)
 
-## 📝 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to fork this repository and customize it for your needs. If you have improvements or fixes, pull requests are welcome!
 
 ---
 
-**Enjoy your new development environment! 🎉**
+**Enjoy your new development environment!**
