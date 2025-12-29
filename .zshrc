@@ -141,4 +141,4 @@ fi
 
 
 # opencode
-export PATH=/home/adityaazizi/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
