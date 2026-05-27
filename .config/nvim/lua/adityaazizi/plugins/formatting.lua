@@ -25,10 +25,21 @@ return {
 
 				-- Python
 				python = { "isort", "black" },
+
+				-- Rust (rustfmt comes from rustup, not Mason)
+				rust = { "rustfmt", lsp_format = "fallback" },
+
+				-- C/C++
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+
+				-- Shell
+				sh = { "shfmt" },
+				bash = { "shfmt" },
 			},
 
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			},
@@ -36,7 +47,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 1000,
 			})

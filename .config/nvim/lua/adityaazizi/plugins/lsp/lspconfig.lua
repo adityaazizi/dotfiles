@@ -4,7 +4,7 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
   },
   config = function()
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -97,5 +97,7 @@ return {
     vim.lsp.config("clangd", {
       cmd = { "clangd", "--background-index", "--clang-tidy" },
     })
+
+    vim.lsp.enable({ "bashls", "taplo", "docker_compose_language_service" })
   end,
 }

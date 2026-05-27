@@ -1,30 +1,14 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
-
--- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
+-- Font & UI
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 19
-
 config.enable_tab_bar = false
+-- "RESIZE" keeps the macOS window controls/top bar accessible
+config.window_decorations = "RESIZE"
 
--- Add fullscreen settings
-config.native_macos_fullscreen_mode = true
-config.initial_rows = 40
-config.initial_cols = 120
-
--- Automatically enter fullscreen mode
-wezterm.on("gui-startup", function()
-	local tab, pane, window = wezterm.mux.spawn_window({})
-	window:gui_window():maximize()
-end)
-
-config.window_decorations = "NONE"
-config.window_background_opacity = 1
-
--- my coolnight colorscheme:
+-- Colors (Coolnight)
 config.colors = {
 	foreground = "#CBE0F0",
 	background = "#011423",
@@ -37,5 +21,11 @@ config.colors = {
 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 }
 
--- and finally, return the configuration to wezterm
+-- The Maximize Logic
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	-- We use a slight delay or call it directly; maximize should work here
+	window:gui_window():maximize()
+end)
+
 return config

@@ -102,6 +102,19 @@ check_prerequisites() {
         return 1
     fi
 
+    # Neovim 0.11+ is required (uses vim.lsp.config / vim.lsp.enable API)
+    if command -v nvim >/dev/null 2>&1; then
+        local nvim_version
+        nvim_version=$(nvim --version | head -1 | sed 's/NVIM v//')
+        local nvim_major nvim_minor
+        nvim_major=$(echo "$nvim_version" | cut -d. -f1)
+        nvim_minor=$(echo "$nvim_version" | cut -d. -f2)
+        if [[ "$nvim_major" -lt 1 && "$nvim_minor" -lt 11 ]]; then
+            print_warning "Neovim $nvim_version detected — this config requires 0.11+."
+            print_warning "LSP will not work. Install a newer build from https://github.com/neovim/neovim/releases"
+        fi
+    fi
+
     print_success "Prerequisites check passed"
     return 0
 }

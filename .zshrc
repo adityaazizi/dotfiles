@@ -115,11 +115,13 @@ source $ZSH/oh-my-zsh.sh
 
 # Platform-specific plugin loading
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  # macOS (Homebrew)
-  [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # macOS: Apple Silicon uses /opt/homebrew, Intel uses /usr/local
+  _brew_prefix="/opt/homebrew"
+  [[ ! -d "$_brew_prefix" ]] && _brew_prefix="/usr/local"
+  [[ -f "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [[ -f "$_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  unset _brew_prefix
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  # Ubuntu/Linux
   [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
@@ -142,3 +144,7 @@ fi
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

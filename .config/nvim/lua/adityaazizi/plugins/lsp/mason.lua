@@ -43,6 +43,18 @@ return {
         -- Utilities
         "lua_ls",
         "marksman",
+
+        -- Rust (managed by rustaceanvim, but Mason installs the binary)
+        "rust_analyzer",
+
+        -- Shell
+        "bashls",
+
+        -- Config formats
+        "taplo",
+
+        -- Docker Compose
+        "docker_compose_language_service",
       },
     })
 
@@ -53,9 +65,16 @@ return {
         "stylua",
         "isort",
         "black",
+        "clang-format",
+        "shfmt",
         -- Linter
         "pylint",
         "eslint_d",
+        "luacheck",
+        "markdownlint",
+        -- DAP adapters
+        "debugpy",
+        "codelldb",
       },
     })
   end,
