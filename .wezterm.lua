@@ -5,8 +5,13 @@ local config = wezterm.config_builder()
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 19
 config.enable_tab_bar = false
--- "RESIZE" keeps the macOS window controls/top bar accessible
-config.window_decorations = "RESIZE"
+-- macOS: "RESIZE" keeps the traffic-light buttons but hides the title bar
+-- Linux: "NONE" fully removes the title bar (WezTerm still handles edge-resize)
+if wezterm.target_triple:find("darwin") then
+	config.window_decorations = "RESIZE"
+else
+	config.window_decorations = "NONE"
+end
 
 -- Colors (Coolnight)
 config.colors = {
